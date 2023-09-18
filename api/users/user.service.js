@@ -96,6 +96,44 @@ module.exports = {
             }
         );
     },
+    updateInfo: (data, callBack) => {
+        pool.query(
+            `update utilisateur set nomuser=?, prenomuser=?, telephoneuser=?, adresseuser=?, emailuser=?, personeacontacter=?, groupesanguin=?  where iduser = ?`,  
+            [
+                data.nomuser,
+                data.prenomuser,
+                data.telephoneuser,
+                data.adresseuser,
+                data.emailuser,
+                data.personeacontacter,
+                data.groupesanguin,
+                data.iduser
+            ],
+                (error, results, fields) => {
+                if (error) {
+                    callBack(error);
+                    return;
+                }
+                return callBack(null, results);
+            }
+        );
+    },
+    changePassword: (data, callBack) => {
+        pool.query(
+            `update utilisateur set passworduser=?  where iduser = ?`,  
+            [
+                data.passworduser,
+                data.iduser
+            ],
+                (error, results, fields) => {
+                if (error) {
+                    callBack(error);
+                    return;
+                }
+                return callBack(null, results);
+            }
+        );
+    },
     deleteUser: (data, callBack) => {
 
         pool.query(

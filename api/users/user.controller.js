@@ -6,6 +6,8 @@ const {
     getTotalUser,
     updateUser,
     deleteUser,
+    updateInfo,
+    changePassword,
 } = require("./user.service");
 
 const { hashSync, genSaltSync, compare } = require("bcrypt");
@@ -55,7 +57,7 @@ module.exports = {
                     expiresIn: process.env.JWT_EXPIRES_IN
                 });
 
-                console.log('The token is :' + jsontoken);
+               // console.log('The token is :' + jsontoken);
 
                 res.json({
                     code: 200, 
@@ -216,6 +218,48 @@ module.exports = {
             return res.json({
                 code: 200,
                 message: "updated successfully"
+            });
+        });
+    },
+    updateInfo: (req, res) => {
+        const body = req.body;
+       // const salt = genSaltSync(10);
+       // body.password = hashSync(body.password, salt);
+       updateInfo(body, (err, results) => {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            if (!results) {
+                return res.json({
+                    code: 200,
+                    message: "Failed to updated user"
+                });
+            }
+            return res.json({
+                code: 200,
+                message: "Modification effectué"
+            });
+        });
+    },
+    changePassword: (req, res) => {
+        const body = req.body;
+       const salt = genSaltSync(10);
+       body.passworduser = hashSync(body.passworduser, salt);
+       changePassword(body, (err, results) => {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            if (!results) {
+                return res.json({
+                    code: 500,
+                    message: "Modification echoué"
+                });
+            }
+            return res.json({
+                code: 200,
+                message: "Modification effectué"
             });
         });
     },

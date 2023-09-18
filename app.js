@@ -10,7 +10,7 @@ const http = require('http').createServer(app);
 //   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 // });
 
-
+ 
 
 const io = require('socket.io')(http,{
 	cors: { 
@@ -18,8 +18,8 @@ const io = require('socket.io')(http,{
 	    methodes: [ "GET" , "POST" ] 
 	} 
 });
-//
-var router = express.Router();
+// 
+var router = express.Router(); 
 const cors = require('cors');
 app.use(express.json());
 app.use(cors({

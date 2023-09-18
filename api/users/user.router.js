@@ -8,7 +8,9 @@ const {
     getTotalUser,
     updateUsers,
     deleteUser,
-    getUserInfo
+    getUserInfo,
+    updateInfo,
+    changePassword
 } = require("./user.controller");
 
 
@@ -19,6 +21,8 @@ router.get("/total-user", getTotalUser);
 router.get("/:id", getUserByUserId);
 router.post("/login", login);
 router.patch("/", updateUsers);
+router.patch("/users-info", updateInfo);
+router.patch("/change-password", changePassword);
 router.delete("/", deleteUser);
 
 module.exports = router;
